@@ -57,23 +57,23 @@
 
  <section class="py-14 px-10 gap-y-6 flex flex-col justify-center items-center">
   <div class="flex flex-wrap gap-x-5 gap-y-5 image-and-buttons justify-center w-fit">
-   <div class="object-cover buy-now-image w-90 h-90 lg:w-110 lg:h-110">
+   <div class="object-cover buy-now-image sm:w-90 sm:h-90 lg:w-110 lg:h-110">
     <?php
      $bnh_select = $pdo->query("SELECT * FROM buy_now_head");
      $bnh_product = $bnh_select->fetch(PDO::FETCH_ASSOC);
     ?>
     <img class="h-full w-full object-cover object-center border-1 border-green-900 shadow-md" src="img/<?php echo $bnh_product['image'] ?>" alt="">
    </div>
-   <div class="flex flex-col justify-between inputs-and-buttons w-90 lg:w-110">
+   <div class="flex flex-col justify-between inputs-and-buttons w-[100%] sm:w-90 lg:w-110 gap-y-5">
     <div class="font-poppins item-title">
      <h1 class="font-bold text-3xl lg:text-5xl text-green-900"><?php echo $bnh_product['name'] ?></h1>
-     <h2 class="font-semibold text-xl lg:text-3xl text-yellow-500">&#8369;<?php echo $bnh_product['price'] ?></h2>
-     <h2 class="font-semibold text-lg lg:text-2xl text-yellow-600 line-through">&#8369;<?php echo $bnh_product['discount_price']?></h2>
+     <h2 class="font-normal text-xl lg:text-3xl text-green-800/90">&#8369;<?php echo $bnh_product['price'] ?></h2>
+     <h2 class="font-normal text-lg lg:text-2xl text-gray-500/50 line-through">&#8369;<?php echo $bnh_product['discount_price']?></h2>
     </div>
     <form class="flex flex-col gap-y-3 lg:gap-y-4" method="post" action="">
-     <input class="lg:h-15 h-12 outline-none px-5 border-3 border-green-900 text-green-900 text-3xl font-poppins font-bold" type="number" name="rice-quantity" min="1" step="1" value="1">
-     <input class="lg:h-15 h-12 cursor-pointer border-3 text-green-900 border-green-900 text-3xl font-semibold font-poppins" type="submit" name="add_to_cart" value="ADD TO CART">
-     <input class="lg:h-15 h-12 cursor-pointer bg-green-900 text-green-100 font-poppins font-semibold text-3xl" type="submit" name="buy_now" value="BUY NOW">
+     <input class="w-[100%] lg:h-15 h-12 outline-none px-5 border-3 border-green-900 text-green-900 text-3xl font-poppins font-bold" type="number" name="rice-quantity" min="1" step="1" value="1">
+     <input class="w-[100%] lg:h-15 h-12 cursor-pointer border-3 text-green-900 border-green-900 text-3xl font-semibold font-poppins" type="submit" name="add_to_cart" value="ADD TO CART">
+     <input class="w-[100%] lg:h-15 h-12 cursor-pointer bg-green-900 text-green-100 font-poppins font-semibold text-3xl" type="submit" name="buy_now" value="BUY NOW">
     </form>
    </div>
   </div>
@@ -88,7 +88,7 @@
 
  <!-- Featured Products -->
 
- <section class="w-full py-14 px-10 space-y-10">
+	<section class="w-full py-14 px-10 space-y-10">
   <div class="featured-p-title font-poppins text-center">
    <h2 class="font-semibold text-3xl text-green-900">Featured Products</h2>
   </div>
@@ -106,14 +106,23 @@
       <h2 class="font-bold text-2xl text-green-900"><?= htmlspecialchars($product['name']) ?></h2>
       <div class="text-right">
        <h2 class="font-semibold text-xl text-yellow-700">&#8369;<?= htmlspecialchars($product['price']) ?></h2>
-       <h2 class="font-semibold text-lg text-yellow-700 line-through">&#8369;<?= htmlspecialchars($product['discount_price']) ?></h2>
+       <h2 class="font-semibold text-lg text-gray-500/50 line-through">&#8369;<?= htmlspecialchars($product['discount_price']) ?></h2>
       </div>
      </div>
      <div class="w-full text-justify text-green-900 overflow-auto h-40 scrollbar-hide">
       <p><?= htmlspecialchars($product['description']) ?></p>
      </div>
-     <div class="w-full text-right">
-      <input class="rounded-md cursor-pointer bg-green-500 py-2 px-4 font-semibold text-green-950" type="button" value="ADD TO CART">
+     <div class="grid grid-cols-3 gap-x-2 w-full">
+      <div class="relative col-span-2">
+       <select class="cursor-pointer py-2 px-3 border-1 focus:border-green-700 appearance-none outline-none w-full" name="" id="">
+        <option value="">25kg</option>
+        <option value="">75kg</option>
+        <option value="">125kg</option>
+       </select>
+       <img class="-z-1 absolute right-3 top-1/2 -translate-y-1/2 w-[18px]" src="svg/down.svg" alt="">
+      </div>
+      <!-- <input class="py-1 col-span-2 px-3 border-1" type="number" min="1" value="1"> -->
+      <input class="rounded-md cursor-pointer bg-green-400/30 backdrop-blur-lg font-semibold text-green-950 text-[18px] text-center" type="button" value="BUY">
      </div>
     </div>
    </div>
@@ -123,20 +132,21 @@
 
  <!-- TESTIMONIALS -->
 
- <section class="flex flex-col items-center p-10 space-y-8">
+ <section class="flex flex-col items-center p-10 space-y-8 min-h-[588px]">
   <div class="font-poppins text-center">
    <h1 class="font-semibold text-3xl text-green-900">Testimonials</h1>
   </div>
+  <?php 
+   $stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id ASC LIMIT 10");
+   $stml_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  ?>
+  <?php if (!empty($stml_result)): ?>
   <div class="container swiper">
    <div class="card-wrapper max-w-[1200px] mb-10 mx-auto overflow-hidden py-5">
-    <?php 
-     $stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id ASC LIMIT 10");
-     $stml_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    ?>
     <ul class="card-list swiper-wrapper mx-auto">
      <?php foreach($stml_result as $testimonia): ?>
      <li class="swiper-slide card-item font-poppins">
-      <div class=" shadow-md block bg-green-200 py-5 px-7 h-90 flex flex-col justify-between rounded-lg space-y-5">
+      <div class="cursor-grab shadow-md block bg-green-200 py-5 px-7 h-90 flex flex-col justify-between rounded-lg space-y-5">
        <h1 class="text-3xl font-semibold overflow-auto scrollbar-hide text-justify h-90 text-green-900">"<?= htmlspecialchars($testimonia['testimonial']) ?>"</h1>
        <h2 class="text-2xl font-medium text-blue-900">– <?= htmlspecialchars($testimonia['username']) ?></h2>
       </div>
@@ -153,10 +163,117 @@
     <div class="swiper-pagination block 2xl:hidden"></div>
    </div>
   </div>
+  <?php else: ?>
+  <div class="h-100 flex justify-center items-center">
+   <h1>No Testimonials Available at the moment.</h1>
+  </div>
+  <?php endif; ?>
  </section>
 
+ <!-- Sliding Images -->
+ <?php 
+  $stmt = $pdo->query("SELECT * FROM image_slider ORDER BY id ASC LIMIT 10");
+  $image_slide_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $totalItems = count($image_slide_result);
+ ?>
+ <section style="--totalItems: <?= $totalItems ?>" class="rice-img-slide-section min-h-[266.4px]">
+  <?php if (!empty($image_slide_result)): ?>
+  <div class="rice-img-slide-wrapper">
+   <?php foreach($image_slide_result as $index => $img_item): ?>
+   <img class="img-item" style="--i:<?= $index + 1 ?>" src="img/<?= htmlspecialchars($img_item['images']) ?>" alt="">
+   <? endforeach; ?>
+  </div>
+  <?php else: ?>
+  <div class="h-100 flex justify-center items-center">
+   <h1>No images available at the moment.</h1>
+  </div>
+  <?php endif; ?>
+ </section>
+
+ <!-- Vision & Mission Statement -->
+ <section class="flex justify-center p-10">
+  <div class="max-w-[1300px] flex flex-wrap justify-center gap-10">
+   <div class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
+    <h1 class="text-3xl md:text-5xl font-bold text-green-900">Our Vision</h1>
+    <p class="md:text-2xl text-justify text-green-800">Our vision is to be the trusted name in the rice industry, providing every Filipino family with access to high-quality, affordable rice while empowering local farmers and promoting sustainable agriculture. We envision a future where our business contributes to a healthier, more food-secure nation, uplifting communities and fostering growth through dedication and integrity.</p>
+   </div>
+   <div class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
+    <h1 class="text-3xl md:text-5xl font-bold text-green-900">Our Mission</h1>
+    <p class="md:text-2xl text-justify text-green-800">Our mission is to deliver exceptional rice products that meet the diverse needs of our customers, ensuring quality and affordability at every step. We are committed to supporting local farmers by fostering fair trade practices and sustainability while maintaining excellent customer service. Through innovation, community engagement, and a steadfast focus on social responsibility, we aim to create a lasting impact in the lives of our customers and stakeholders.</p>
+   </div>
+  </div>
+ </section>
+
+ <!-- How to cook a perfect rice. -->
+ <section class="flex flex-col items-center p-10 space-y-8">
+  <div class="font-poppins text-center">
+   <h1 class="font-semibold text-3xl text-green-900">How to cook a perfect rice?</h1>
+  </div>
+  <div class="flex flex-wrap justify-center max-w-[1400px] gap-10">
+   <div class="flex items-center w-fit">
+    <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">1</h2>
+    <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
+    <h3 class="font-bold text-green-800">===</h3>
+    <div class="bg-green-200 md:w-110 p-3 rounded-md hover:bg-green-100 hover:shadow-md cursor-pointer">
+     <h2 class="text-2xl text-green-900 font-bold">Rinse the Rice</h2>
+     <p class="text-lg text-green-800">Rinse the rice under cold water 2–3 times until the water runs clear. This removes excess starch that causes rice to be sticky.</p>
+    </div>
+   </div>
+   <div class="flex items-center w-fit">
+    <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">2</h2>
+    <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
+    <h3 class="font-bold text-green-800">===</h3>
+    <div class="bg-green-200 md:w-110 p-3 rounded-md hover:bg-green-100 hover:shadow-md cursor-pointer">
+     <h2 class="text-2xl text-green-900 font-bold">Measure and Boil</h2>
+     <p class="text-lg text-green-800">Add the rinsed rice and measured water to a pot. Add salt or oil if desired. Bring to a boil over medium-high heat uncovered.</p>
+    </div>
+   </div>
+   <div class="flex items-center w-fit">
+    <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">3</h2>
+    <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
+    <h3 class="font-bold text-green-800">===</h3>
+    <div class="bg-green-200 md:w-110 p-3 rounded-md hover:bg-green-100 hover:shadow-md cursor-pointer">
+     <h2 class="text-2xl text-green-900 font-bold">Simmer and Cover</h2>
+     <p class="text-lg text-green-800">Once it starts boiling, reduce heat to low, cover with a tight-fitting lid, and simmer for:</p>
+     <p class="text-lg text-green-800 ml-3">=> 15–18 minutes (for Sinandomeng or Jasmine rice)</p>
+     <p class="text-lg text-green-800 ml-3">=> Until water is fully absorbed (no bubbling or visible water)</p>
+    </div>
+   </div>
+   <div class="flex items-center w-fit">
+    <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">4</h2>
+    <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
+    <h3 class="font-bold text-green-800">===</h3>
+    <div class="bg-green-200 md:w-110 p-3 rounded-md hover:bg-green-100 hover:shadow-md cursor-pointer">
+     <h2 class="text-2xl text-green-900 font-bold">Rest</h2>
+     <p class="text-lg text-green-800">Turn off heat. Let the rice sit covered for 10 minutes. This step makes the rice fluffy.</p>
+    </div>
+   </div>
+   <div class="flex items-center w-fit">
+    <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">5</h2>
+    <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
+    <h3 class="font-bold text-green-800">===</h3>
+    <div class="bg-green-200 md:w-110 p-3 rounded-md hover:bg-green-100 hover:shadow-md cursor-pointer">
+     <h2 class="text-2xl text-green-900 font-bold">Fluff and Serve</h2>
+     <p class="text-lg text-green-800">Fluff gently with a fork and serve hot.</p>
+    </div>
+   </div>
+ </section> 
+
+ <!-- EMAIL ADDRESS -->
+ <section class="flex flex-col items-center p-10 space-y-8">
+  <div class="font-poppins text-center">
+   <h1 class="font-semibold text-3xl text-green-900">Not ready to buy yet?</h1>
+   <p>Enter your email to receive discounts.</p>
+  </div>
+  <div class="w-full md:w-150 outline-2 outline-green-600 rounded-tr-xl rounded-bl-xl overflow-hidden">
+   <form method="post" class="grid grid-cols-1 md:grid-cols-3 font-poppins">
+    <input class="col-span-2 h-12 px-3 outline-none bg-green-300/30" type="email" placeholder="Email Address" required>
+    <button class="h-12 px-3 bg-green-600 cursor-pointer font-medium text-lg text-green-200" type="submit">Subscribe</button>
+   </form>
+  </div>
+ </section>
+ 
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <script src="src/index.js"></script>
 </body>
 </html>
-
