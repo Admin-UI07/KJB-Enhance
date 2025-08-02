@@ -1,32 +1,21 @@
-<?php
+<?php 
 
-class cryptoConverter {
- public function __construct(public string $currencyCode) {}
-
- public function convert($amount) {
-  $url = "http://cex.io/api/ticker/{$this->currencyCode}/USD";
-  $apiResponse = file_get_contents($url);
-  $data = json_decode($apiResponse, true);
-  if ($url) {
-   $currentPrice = $data['last'];
-   return $amount * $currentPrice;
-  }
-
-  return false;
- }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['test_submit'])) {
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+    
+    if ($_FILES['test_file']['error'] === UPLOAD_ERR_OK) {
+        move_uploaded_file($_FILES['test_file']['tmp_name'], 'test_upload.txt');
+        echo "File uploaded!";
+    } else {
+        echo "Error: " . $_FILES['test_file']['error'];
+    }
 }
-
-$amount = 2;
-$crypto = "BTC";
-
-$converter = new cryptoConverter($crypto);
-$result = $converter->convert($amount);
-
-if (!$result) {
- echo "<h1>ERROR!</h1>";
- return;
-}
-
-echo "<h1>You have $result $crypto</h1>";
 
 ?>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="test_file">
+    <button type="submit" name="test_submit">Upload</button>
+</form>
