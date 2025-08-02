@@ -8,12 +8,17 @@
 
 	require_once 'add_testimonials.php';
 
+	require_once 'add_image_slider.php';
+
 	$stmt = $pdo->query("SELECT * FROM featured_product ORDER BY id ASC LIMIT 9");
 	$fp_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-	$stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id ASC");
+	$stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id ASC LIMIT 10");
 	$tml = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	$stmt = $pdo->query("SELECT * FROM image_slider ORDER BY id ASC LIMIT 10");
+	$img_slide = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +74,20 @@
 		<input type="text" maxlength="25" name="user_name_for_testimony" placeholder="User">
 		<textarea name="user_testimony" placeholder="Testify here."></textarea>
 		<button type="submit" name="sbmt_for_testimony">Submit</button>
+	</form>
+
+	<br><br>
+
+	<!-- Form for Image Slider -->
+	<form method="post" enctype="multipart/form-data">
+		<select name="img_row_to_replace">
+			<option value="">Add new row</option>
+			<?php foreach($img_slide as $index => $image): ?>
+				<option value="<?= htmlspecialchars($image['id']) ?>"> <?= $index + 1 ?> </option>
+			<?php endforeach; ?>
+		</select>
+		<input type="file" name="img_for_slider" accept="image/*">
+		<button type="submit" name="sbmt_for_img_slider">Upload</button>
 	</form>
 </body>
 
