@@ -12,13 +12,18 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="img/KJB-Logo.webp">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
  <link href="src/global.css" rel="stylesheet">
  <title>Kuya Jaypee Bigasan</title>
 </head>
 <body class="scrollbar-hide bg-lime-100">
+	<div id="progress" class="fixed bottom-10 right-10 z-10 h-12 w-12 hidden place-items-center text-lg text-green-300 rounded-full cursor-pointer shadow-md">
+		<span id="progress-value" class="block h-[calc(100%-15px)] w-[calc(100%-15px)] bg-green-700 grid place-items-center rounded-full">
+			<i class="fa-solid fa-circle-arrow-up"></i>
+		</span>
+	</div>
 
  <!-- First Section -->
 
@@ -55,7 +60,7 @@
 
  <!-- BUY NOW -->
 
- <section class="py-14 px-10 gap-y-6 flex flex-col justify-center items-center">
+ <section id="block-appear" class="py-14 px-10 gap-y-6 flex flex-col justify-center items-center">
   <div class="flex flex-wrap gap-x-5 gap-y-5 image-and-buttons justify-center w-fit">
    <div class="object-cover buy-now-image sm:w-90 sm:h-90 lg:w-110 lg:h-110">
     <?php
@@ -90,7 +95,7 @@
 
 	<section class="w-full py-14 px-10 space-y-10">
   <div class="featured-p-title font-poppins text-center">
-   <h2 class="font-semibold text-3xl text-green-900">Featured Products</h2>
+   <h2 id="block-appear" class="font-semibold text-3xl text-green-900">Featured Products</h2>
   </div>
   <div class="flex flex-wrap gap-6 justify-center">
    <?php
@@ -99,7 +104,7 @@
    ?>
    <!-- Product-Cards -->
    <?php foreach ($fp_products as $product): ?>
-   <div class="bg-gray-100/30 backdrop-blur-lg p-3 w-90 font-poppins rounded-lg overflow-hidden shadow-md border-1">
+   <div id="block-appear" class="bg-gray-100/30 backdrop-blur-lg p-3 w-90 font-poppins rounded-lg overflow-hidden shadow-md border-1">
     <img class="rounded-md w-full object-cover object-center h-60" src="img/<?= htmlspecialchars($product['image']) ?>" alt="">
     <div class="w-full space-y-3">
      <div class="flex flex-wrap justify-between items-start mt-3 gap-x-5">
@@ -122,7 +127,8 @@
        <img class="-z-1 absolute right-3 top-1/2 -translate-y-1/2 w-[18px]" src="svg/down.svg" alt="">
       </div>
       <!-- <input class="py-1 col-span-2 px-3 border-1" type="number" min="1" value="1"> -->
-      <input class="rounded-md cursor-pointer bg-green-400/30 backdrop-blur-lg font-semibold text-green-950 text-[18px] text-center" type="button" value="BUY">
+      <!-- <input class="rounded-md cursor-pointer bg-green-400/30 backdrop-blur-lg font-semibold text-green-950 text-[18px] text-center" type="button" value="BUY"> -->
+						<button class="rounded-md cursor-pointer bg-green-400/30 backdrop-blur-lg font-semibold text-green-950 text-[18px] text-center" type="button" value="BUY"><i class="fa-solid fa-cart-plus"></i></button>
      </div>
     </div>
    </div>
@@ -132,7 +138,7 @@
 
  <!-- TESTIMONIALS -->
 
- <section class="flex flex-col items-center p-10 space-y-8 min-h-[588px]">
+ <section id="block-appear" class="flex flex-col items-center p-10 space-y-8 min-h-[588px]">
   <div class="font-poppins text-center">
    <h1 class="font-semibold text-3xl text-green-900">Testimonials</h1>
   </div>
@@ -176,7 +182,7 @@
   $image_slide_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $totalItems = count($image_slide_result);
  ?>
- <section style="--totalItems: <?= $totalItems ?>" class="rice-img-slide-section min-h-[266.4px]">
+ <section id="block-appear" style="--totalItems: <?= $totalItems ?>" class="rice-img-slide-section min-h-[266.4px]">
   <?php if (!empty($image_slide_result)): ?>
   <div class="rice-img-slide-wrapper">
    <?php foreach($image_slide_result as $index => $img_item): ?>
@@ -193,11 +199,11 @@
  <!-- Vision & Mission Statement -->
  <section class="flex justify-center p-10">
   <div class="max-w-[1300px] flex flex-wrap justify-center gap-10">
-   <div class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
+   <div id="block-appear" class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
     <h1 class="text-3xl md:text-5xl font-bold text-green-900">Our Vision</h1>
     <p class="md:text-2xl text-justify text-green-800">Our vision is to be the trusted name in the rice industry, providing every Filipino family with access to high-quality, affordable rice while empowering local farmers and promoting sustainable agriculture. We envision a future where our business contributes to a healthier, more food-secure nation, uplifting communities and fostering growth through dedication and integrity.</p>
    </div>
-   <div class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
+   <div id="block-appear" class="md:w-[500px] bg-green-300/20 p-8 space-y-4 rounded-xl">
     <h1 class="text-3xl md:text-5xl font-bold text-green-900">Our Mission</h1>
     <p class="md:text-2xl text-justify text-green-800">Our mission is to deliver exceptional rice products that meet the diverse needs of our customers, ensuring quality and affordability at every step. We are committed to supporting local farmers by fostering fair trade practices and sustainability while maintaining excellent customer service. Through innovation, community engagement, and a steadfast focus on social responsibility, we aim to create a lasting impact in the lives of our customers and stakeholders.</p>
    </div>
@@ -206,11 +212,11 @@
 
  <!-- How to cook a perfect rice. -->
  <section class="flex flex-col items-center p-10 space-y-8">
-  <div class="font-poppins text-center">
+  <div id="block-appear" class="font-poppins text-center">
    <h1 class="font-semibold text-3xl text-green-900">How to cook a perfect rice?</h1>
   </div>
   <div class="flex flex-wrap justify-center max-w-[1400px] gap-10">
-   <div class="flex items-center w-fit">
+   <div id="block-appear-slide" class="flex items-center w-fit">
     <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">1</h2>
     <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
     <h3 class="font-bold text-green-800">===</h3>
@@ -219,7 +225,7 @@
      <p class="text-lg text-green-800">Rinse the rice under cold water 2–3 times until the water runs clear. This removes excess starch that causes rice to be sticky.</p>
     </div>
    </div>
-   <div class="flex items-center w-fit">
+   <div id="block-appear-slide" class="flex items-center w-fit">
     <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">2</h2>
     <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
     <h3 class="font-bold text-green-800">===</h3>
@@ -228,7 +234,7 @@
      <p class="text-lg text-green-800">Add the rinsed rice and measured water to a pot. Add salt or oil if desired. Bring to a boil over medium-high heat uncovered.</p>
     </div>
    </div>
-   <div class="flex items-center w-fit">
+   <div id="block-appear-slide" class="flex items-center w-fit">
     <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">3</h2>
     <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
     <h3 class="font-bold text-green-800">===</h3>
@@ -239,7 +245,7 @@
      <p class="text-lg text-green-800 ml-3">=> Until water is fully absorbed (no bubbling or visible water)</p>
     </div>
    </div>
-   <div class="flex items-center w-fit">
+   <div id="block-appear-slide" class="flex items-center w-fit">
     <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">4</h2>
     <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
     <h3 class="font-bold text-green-800">===</h3>
@@ -248,7 +254,7 @@
      <p class="text-lg text-green-800">Turn off heat. Let the rice sit covered for 10 minutes. This step makes the rice fluffy.</p>
     </div>
    </div>
-   <div class="flex items-center w-fit">
+   <div id="block-appear-slide" class="flex items-center w-fit">
     <h2 class="bg-green-300 text-green-900 py-2 px-4 rounded-full font-bold">5</h2>
     <h3 class="font-bold text-green-800 hidden sm:block">=============</h3>
     <h3 class="font-bold text-green-800">===</h3>
@@ -260,7 +266,7 @@
  </section> 
 
  <!-- EMAIL ADDRESS -->
- <section class="flex flex-col items-center p-10 space-y-8">
+ <section id="block-appear" class="flex flex-col items-center p-10 space-y-8">
   <div class="font-poppins text-center">
    <h1 class="font-semibold text-3xl text-green-900">Not ready to buy yet?</h1>
    <p>Enter your email to receive discounts.</p>
@@ -272,6 +278,55 @@
    </form>
   </div>
  </section>
+
+	<!-- FOOTER -->
+	<footer class="flex justify-center bg-green-300/50 mt-10 font-poppins">
+		<div class="flex justify-between flex-wrap gap-5 w-[1500px] p-8">
+			<div>
+				<img class="w-20" src="/img/KJB-Logo.webp" alt="">
+				<ul class="text-green-800">
+					<li class="font-semibold text-lg text-green-900">Address:</li>
+					<li>Sitio Dalig Itaas</li>
+					<li>Cagsiay II</li>
+					<li>Mauban, Quezon</li>
+					<li class="text-xs">Mon-Sat 8am-7pm</li>
+					<li class="text-xs">&copy; 2025 Kuya Jaypee Bigasan</li>
+				</ul>
+			</div>
+			<div class="space-y-8">
+				<h2 class="font-semibold text-lg text-green-900">Navigation</h2>
+				<ul class="text-green-900 text-base/7">
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Home</li>
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Products</li>
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Reviews</li>
+				</ul>
+			</div>
+			<div class="space-y-8">
+				<h2 class="font-semibold text-lg text-green-900">About Us</h2>
+				<ul class="text-green-900 text-base/7">
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Our Story</li>
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Contact Us</li>
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Privacy Policy</li>
+					<li class="cursor-pointer hover:opacity-75 hover:underline">Refund Policy</li>
+				</ul>
+			</div>
+			<div class="space-y-8">
+				<h2 class="font-semibold text-lg text-green-900">Payment</h2>
+				<div class="space-y-2">
+					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/GCash_logo.svg" alt="">
+					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/Maya_logo.svg" alt="">
+					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/PayPal.svg" alt="">
+				</div>
+			</div>
+			<div class="space-y-8"> 
+				<h2 class="font-semibold text-lg text-green-900">Social Media</h2>
+				<div class="text-3xl text-green-800">
+					<i class="fa-brands fa-instagram"></i>
+					<i class="fa-brands fa-square-facebook"></i>
+				</div>
+			</div>
+		</div>
+	</footer>
  
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <script src="src/index.js"></script>
