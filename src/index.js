@@ -26,22 +26,6 @@ new Swiper('.card-wrapper', {
   }
 });
 
-const openBtn = document.querySelector('.show-menu');
-const closeBtn = document.querySelector('.close-menu');
-const menuMobile = document.getElementById('for-mobile-view');
-
-openBtn.addEventListener('click', () => {
- openBtn.classList.add('hidden');
- closeBtn.classList.remove('hidden');
- menuMobile.classList.toggle('hidden');
-});
-
-closeBtn.addEventListener('click', () => {
- openBtn.classList.remove('hidden');
- closeBtn.classList.add('hidden');
- menuMobile.classList.toggle('hidden');
-});
-
 // scrollToTop
 let calcScrollValue = () => {
   let scrollProgress = document.getElementById('progress');
