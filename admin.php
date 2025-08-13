@@ -4,21 +4,30 @@
 
 	require_once 'buy_now_head.php';
 
-	require_once 'add_product.php';
+	require_once 'add_fproduct.php';
 
 	require_once 'add_testimonials.php';
 
 	require_once 'add_image_slider.php';
 
+	require_once 'add_food_product.php';
+
+	require_once 'add_nfood_product.php';
+
 	$stmt = $pdo->query("SELECT * FROM featured_product ORDER BY id ASC LIMIT 9");
 	$fp_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 
 	$stmt = $pdo->query("SELECT * FROM testimonials ORDER BY id ASC LIMIT 10");
 	$tml = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	$stmt = $pdo->query("SELECT * FROM image_slider ORDER BY id ASC LIMIT 10");
 	$img_slide = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	$stmt = $pdo->query("SELECT * FROM food_products ORDER BY id ASC LIMIT 9");
+	$foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	$stmt = $pdo->query("SELECT * FROM non_food_products ORDER BY id ASC LIMIT 9");
+	$non_foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +97,38 @@
 		</select>
 		<input type="file" name="img_for_slider" accept="image/*">
 		<button type="submit" name="sbmt_for_img_slider">Upload</button>
+	</form>
+
+	<br><br>
+
+	<!-- Form for Food-Products -->
+	<form method="post" enctype="multipart/form-data">
+		<select name="foods_replace">
+			<option value="">Add new row</option>
+			<?php foreach ($foods as $index => $food): ?>
+				<option value="<?= htmlspecialchars($food['id']) ?>"><?= htmlspecialchars($food['name']) ?></option>
+			<?php endforeach; ?>
+		</select>
+		<input type="text" name="foods_name" placeholder="Product Name">
+		<input type="text" name="foods_price" placeholder="Price">
+		<input type="file" name="foods_image" accept="image/*">
+		<button type="submit" name="sbmt_foods">Submit</button>
+	</form>
+
+	<br><br>
+
+	<!-- Form for Non-Foods-Products -->
+	<form method="post" enctype="multipart/form-data">
+		<select name="n_foods_replace">
+			<option value="">Add new row</option>
+			<?php foreach ($non_foods as $non_food): ?>
+				<option value="<?= htmlspecialchars($non_food['id']) ?>"><?= htmlspecialchars($non_food['name']) ?></option>
+			<?php endforeach; ?>
+			<input type="text" name="n_foods_name" placeholder="Product Name">
+			<input type="text" name="n_foods_price" placeholder="Price">
+			<input type="file" name="n_foods_img" accept="image/*">
+			<button type="submit" name="sbmt_n_foods">Submit</button>
+		</select>
 	</form>
 </body>
 
