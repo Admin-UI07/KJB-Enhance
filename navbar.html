@@ -2,14 +2,14 @@
  <div class="navbar py-3 px-5 flex justify-between items-center w-[1500px]">
   <img class="w-20 drop-shadow-lg" src="img/KJB-Logo.webp" alt="kjb-logo">
   <ul class="font-poppins hidden md:inline-flex gap-15 text-xl font-semibold text-green-950">
-   <li class="cursor-pointer hover:underline">Home</li>
-   <li class="cursor-pointer hover:underline">Products</li>
-   <li class="cursor-pointer hover:underline">Reviews</li>
+   <li id="home" class="cursor-pointer hover:underline"><a href="index.php">Home</a></li>
+   <li id="products" class="cursor-pointer hover:underline"><a href="products.php">Products</a></li>
+   <li id="reviews" class="cursor-pointer hover:underline"><a href="reviews.php">Reviews</a></li>
   </ul>
   <div class="hidden md:inline-flex gap-2 text-xl">
-   <i class="text-green-950 cursor-pointer fa-solid fa-magnifying-glass"></i>
-   <i class="text-green-950 cursor-pointer fa-solid fa-user"></i>
-   <i class="text-green-950 cursor-pointer fa-solid fa-cart-arrow-down"></i>
+   <a href=""><i class="text-green-950 cursor-pointer fa-solid fa-magnifying-glass"></i></a>
+   <a href="admin.php"><i class="text-green-950 cursor-pointer fa-solid fa-user"></i></a>
+   <a href=""><i class="text-green-950 cursor-pointer fa-solid fa-cart-arrow-down"></i></a>
   </div>
   <div class="inline-flex md:hidden">
    <div class="show-menu">
