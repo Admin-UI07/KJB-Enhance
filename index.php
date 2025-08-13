@@ -19,6 +19,7 @@
  <title>Kuya Jaypee Bigasan</title>
 </head>
 <body class="scrollbar-hide bg-lime-100">
+	<!-- Progress Radial -->
 	<div id="progress" class="fixed bottom-10 right-10 z-10 h-12 w-12 hidden place-items-center text-lg text-green-300 rounded-full cursor-pointer shadow-md">
 		<span id="progress-value" class="block h-[calc(100%-15px)] w-[calc(100%-15px)] bg-green-700 grid place-items-center rounded-full">
 			<i class="fa-solid fa-circle-arrow-up"></i>
@@ -31,9 +32,7 @@
  
  <!-- Navbar Area -->
 
-  <?php
-   include('navbar.html');
-  ?>
+ <?php include('navbar.html'); ?>
 
  <!-- Mobile View -->
 
@@ -76,7 +75,17 @@
      <h2 class="font-normal text-lg lg:text-2xl text-gray-500/50 line-through">&#8369;<?php echo $bnh_product['discount_price']?></h2>
     </div>
     <form class="flex flex-col gap-y-3 lg:gap-y-4" method="post" action="">
-     <input class="w-[100%] lg:h-15 h-12 outline-none px-5 border-3 border-green-900 text-green-900 text-3xl font-poppins font-bold" type="number" name="rice-quantity" min="1" step="1" value="1">
+					<div class="grid grid-cols-2 gap-3">
+						<input class="w-[100%] lg:h-15 h-12 outline-none px-5 border-3 border-green-900 text-green-900 text-3xl font-poppins font-semibold" type="number" name="rice-quantity" min="1" step="1" value="1">
+						<div class="relative">
+							<select class="w-[100%] lg:h-15 h-12 outline-none px-3 border-3 border-green-900 text-green-900 text-2xl font-poppins font-semibold cursor-pointer appearance-none" name="" id="">
+								<option value="25">25kg</option>
+								<option value="75">75kg</option>
+								<option value="125">125kg</option>
+							</select>
+							<img class="-z-1 absolute right-3 top-1/2 -translate-y-1/2 w-[18px]" src="svg/down.svg" alt="">
+						</div>
+					</div>
      <input class="w-[100%] lg:h-15 h-12 cursor-pointer border-3 text-green-900 border-green-900 text-3xl font-semibold font-poppins" type="submit" name="add_to_cart" value="ADD TO CART">
      <input class="w-[100%] lg:h-15 h-12 cursor-pointer bg-green-900 text-green-100 font-poppins font-semibold text-3xl" type="submit" name="buy_now" value="BUY NOW">
     </form>
@@ -97,7 +106,7 @@
   <div class="featured-p-title font-poppins text-center">
    <h2 id="block-appear" class="font-semibold text-3xl text-green-900">Featured Products</h2>
   </div>
-  <div class="flex flex-wrap gap-6 justify-center">
+  <div class="flex flex-wrap gap-6 justify-center max-w-[1300px] mx-auto">
    <?php
     $fp_stmt = $pdo->query("SELECT * FROM featured_product ORDER BY id ASC LIMIT 9");
     $fp_products = $fp_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -280,55 +289,10 @@
  </section>
 
 	<!-- FOOTER -->
-	<footer class="flex justify-center bg-green-300/50 mt-10 font-poppins">
-		<div class="flex justify-between flex-wrap gap-5 w-[1500px] p-8">
-			<div>
-				<img class="w-20" src="/img/KJB-Logo.webp" alt="">
-				<ul class="text-green-800">
-					<li class="font-semibold text-lg text-green-900">Address:</li>
-					<li>Sitio Dalig Itaas</li>
-					<li>Cagsiay II</li>
-					<li>Mauban, Quezon</li>
-					<li class="text-xs">Mon-Sat 8am-7pm</li>
-					<li class="text-xs">&copy; 2025 Kuya Jaypee Bigasan</li>
-				</ul>
-			</div>
-			<div class="space-y-8">
-				<h2 class="font-semibold text-lg text-green-900">Navigation</h2>
-				<ul class="text-green-900 text-base/7">
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Home</li>
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Products</li>
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Reviews</li>
-				</ul>
-			</div>
-			<div class="space-y-8">
-				<h2 class="font-semibold text-lg text-green-900">About Us</h2>
-				<ul class="text-green-900 text-base/7">
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Our Story</li>
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Contact Us</li>
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Privacy Policy</li>
-					<li class="cursor-pointer hover:opacity-75 hover:underline">Refund Policy</li>
-				</ul>
-			</div>
-			<div class="space-y-8">
-				<h2 class="font-semibold text-lg text-green-900">Payment</h2>
-				<div class="space-y-2">
-					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/GCash_logo.svg" alt="">
-					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/Maya_logo.svg" alt="">
-					<img class="w-20 bg-gray-200 p-2 rounded-md border-1 border-gray-400" src="svg/PayPal.svg" alt="">
-				</div>
-			</div>
-			<div class="space-y-8"> 
-				<h2 class="font-semibold text-lg text-green-900">Social Media</h2>
-				<div class="text-3xl text-green-800">
-					<i class="fa-brands fa-instagram"></i>
-					<i class="fa-brands fa-square-facebook"></i>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<?php include('footer.html'); ?>
  
  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
  <script src="src/index.js"></script>
+ <script src="src/navbar.js"></script>
 </body>
 </html>
