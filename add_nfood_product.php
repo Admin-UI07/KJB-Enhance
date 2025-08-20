@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sbmt_n_foods'])) {
 
  $n_food_name = !empty($_POST['n_foods_name']) ? $_POST['n_foods_name'] : $n_food_row['name'];
  $n_food_price = !empty($_POST['n_foods_price']) ? $_POST['n_foods_price'] : $n_food_row['price'];
+ $n_food_desc = !empty($_POST['n_foods_description']) ? $_POST['n_foods_description'] : $n_food_row['description'];
  $n_food_img_name = $n_food_row['image'] ?? '';
 
  if ($_FILES['n_foods_img']['error'] == 0) {
@@ -31,10 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sbmt_n_foods'])) {
   $stmt = $pdo->prepare("UPDATE non_food_products SET
    image = ?,
    name = ?,
-   price = ?
+   price = ?,
+   description = ?
    WHERE id = ?
   ");
-  $stmt->execute([$n_food_img_name, $n_food_name, $n_food_price, $n_food_to_replace]);
+  $stmt->execute([$n_food_img_name, $n_food_name, $n_food_price, $n_food_desc, $n_food_to_replace]);
  } else {
   $n_food_count = $pdo->query("SELECT COUNT(*) FROM non_food_products")->fetchColumn();
 
@@ -44,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sbmt_n_foods'])) {
   }
 
   $stmt = $pdo->prepare("INSERT INTO non_food_products
-  (image, name, price) VALUES (?, ?, ?)");
-  $stmt->execute([$n_food_img_name, $n_food_name, $n_food_price]);
+  (image, name, price, description) VALUES (?, ?, ?)");
+  $stmt->execute([$n_food_img_name, $n_food_name, $n_food_price, $n_food_desc]);
  }
 
  header('Location: admin.php');
