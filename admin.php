@@ -111,6 +111,7 @@
 		</select>
 		<input type="text" name="foods_name" placeholder="Product Name">
 		<input type="text" name="foods_price" placeholder="Price">
+		<textarea name="foods_description" placeholder="Description"></textarea>
 		<input type="file" name="foods_image" accept="image/*">
 		<button type="submit" name="sbmt_foods">Submit</button>
 	</form>
@@ -126,6 +127,7 @@
 			<?php endforeach; ?>
 			<input type="text" name="n_foods_name" placeholder="Product Name">
 			<input type="text" name="n_foods_price" placeholder="Price">
+			<textarea name="n_foods_description" placeholder="Description"></textarea>
 			<input type="file" name="n_foods_img" accept="image/*">
 			<button type="submit" name="sbmt_n_foods">Submit</button>
 		</select>
