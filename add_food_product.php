@@ -13,6 +13,7 @@
 
   $foods_name = !empty($_POST['foods_name']) ? $_POST['foods_name'] : $foods_row['name'];
   $foods_price = !empty($_POST['foods_price']) ? $_POST['foods_price'] : $foods_row['price'];
+  $foods_desc = !empty($_POST['foods_description']) ? $_POST['foods_description'] : $foods_row['description'];
   $foods_img_name = $foods_row['image'] ?? '';
 
   if ($_FILES['foods_image']['error'] == 0) {
@@ -31,10 +32,11 @@
    $stmt = $pdo->prepare("UPDATE food_products SET
     image = ?,
     name = ?,
-    price = ?
+    price = ?,
+    description = ?
     WHERE id = ?
    ");
-   $stmt->execute([$foods_img_name, $foods_name, $foods_price, $foods_to_replace]);
+   $stmt->execute([$foods_img_name, $foods_name, $foods_price, $foods_desc, $foods_to_replace]);
   } else if (empty($foods_to_replace)) {
    $foods_count = $pdo->query("SELECT COUNT(*) FROM food_products")->fetchColumn();
 
@@ -44,8 +46,8 @@
    }
 
    $stmt = $pdo->prepare("INSERT INTO food_products
-   (image, name, price) VALUES (?, ?, ?)");
-   $stmt->execute([$foods_img_name, $foods_name, $foods_price]);
+   (image, name, price, description) VALUES (?, ?, ?)");
+   $stmt->execute([$foods_img_name, $foods_name, $foods_price, $foods_desc]);
   }
 
   header("Location: admin.php");
