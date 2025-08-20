@@ -25,11 +25,11 @@ html {
 }
 
 .swiper-button-prev {
- left: 50px;
+ left: 20px;
 }
 
 .swiper-button-next {
- right: 50px;
+ right: 20px;
 }
 
 .swiper-pagination-bullet {
@@ -70,7 +70,7 @@ html {
  animation-delay: calc(var(--duration) / var(--totalItems) * (var(--totalItems) - var(--i)) * -1);
 }
 
-#block-appear {
+/* #block-appear {
  animation: appear 5s linear;
  animation-timeline: view();
  animation-range: entry 0% cover 40%;
@@ -80,7 +80,7 @@ html {
  animation: appear-slide 5s linear;
  animation-timeline: view();
  animation-range: entry 0% cover 40%;
-}
+} */
 
 @keyframes scrollX {
  to {
@@ -88,7 +88,7 @@ html {
  }
 }
 
-@keyframes appear-slide {
+/* @keyframes appear-slide {
  from {
   opacity: 0;
   transform: translateX(-100px);
@@ -108,7 +108,7 @@ html {
   opacity: 1;
   scale: 1;
  }
-}
+} */
 
 @media (max-width: 1400px) {
  .rice-img-slide-wrapper {
