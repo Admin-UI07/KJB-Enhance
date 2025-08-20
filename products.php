@@ -48,13 +48,15 @@
   <?php if (!empty($food_result)): ?>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8 max-w-[1400px] mx-auto">
    <?php foreach( $food_result as $foods ): ?>
-   <div class="group flex items-center bg-[#B7EFC5] rounded-lg overflow-hidden shadow-md cursor-pointer">
-    <img class="w-24 h-24 md:w-31 md:h-31 object-cover object-center" src="foods_img/<?= htmlspecialchars($foods['image']) ?>" alt="">
-    <div class="flex w-full flex-col sm:flex-row justify-start sm:justify-between px-5 md:px-7 font-poppins text-green-900 font-medium text-md md:text-xl">
-     <p class="group-hover:underline"><?= htmlspecialchars($foods['name']) ?></p>
-     <p>&#8369;<?= htmlspecialchars($foods['price']) ?></p>
+   <a href="food-details.php?id=<?= htmlspecialchars($foods['id']); ?>">
+    <div class="group flex items-center bg-[#B7EFC5] rounded-lg overflow-hidden shadow-md cursor-pointer border-b-3 border-green-800">
+     <img class="w-24 h-24 md:w-31 md:h-31 object-cover object-center" src="foods_img/<?= htmlspecialchars($foods['image']) ?>" alt="">
+     <div class="flex w-full flex-col sm:flex-row justify-start sm:justify-between px-5 md:px-7 font-poppins text-green-900 font-medium text-md md:text-xl">
+      <p class="group-hover:underline"><?= htmlspecialchars($foods['name']) ?></p>
+      <p>&#8369;<?= htmlspecialchars($foods['price']) ?></p>
+     </div>
     </div>
-   </div>
+   </a>
    <?php endforeach; ?>
   </div>
   <?php else: ?>
@@ -76,13 +78,15 @@
   <?php if (!empty($non_food_result)): ?>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8 max-w-[1400px] mx-auto">
    <?php foreach( $non_food_result as $non_food ): ?>
-   <div class="group flex items-center bg-[#B7EFC5] rounded-lg overflow-hidden shadow-md cursor-pointer">
-    <img class="w-24 h-24 md:w-31 md:h-31 object-cover object-center" src="foods_img/<?= htmlspecialchars($non_food['image']) ?>" alt="">
-    <div class="flex w-full flex-col sm:flex-row justify-start sm:justify-between px-5 md:px-7 font-poppins text-green-900 font-medium text-md md:text-xl">
-     <p class="group-hover:underline"><?= htmlspecialchars($non_food['name']) ?></p>
-     <p>&#8369;<?= htmlspecialchars($non_food['price']) ?></p>
+   <a href="non-foods-details.php?id=<?= htmlspecialchars($non_food['id']); ?>">
+    <div class="group flex items-center bg-[#B7EFC5] rounded-lg overflow-hidden shadow-md cursor-pointer border-b-3 border-green-900">
+     <img class="w-24 h-24 md:w-31 md:h-31 object-cover object-center" src="foods_img/<?= htmlspecialchars($non_food['image']) ?>" alt="">
+     <div class="flex w-full flex-col sm:flex-row justify-start sm:justify-between px-5 md:px-7 font-poppins text-green-900 font-medium text-md md:text-xl">
+      <p class="group-hover:underline"><?= htmlspecialchars($non_food['name']) ?></p>
+      <p>&#8369;<?= htmlspecialchars($non_food['price']) ?></p>
+     </div>
     </div>
-   </div>
+   </a>
    <?php endforeach; ?>
   </div>
   <?php else: ?>
